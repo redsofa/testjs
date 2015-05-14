@@ -46,7 +46,7 @@ module.exports = function(grunt){
                 command: "R -e 'devtools::install()'"
             },
             removeLibFromR:{
-                command: "R -e 'remove.packages('testjs')'"
+                command: "R -e 'remove.packages(\"testjs\")'"
             }
         },
 
