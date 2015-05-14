@@ -15,7 +15,8 @@ module.exports = function(grunt){
     grunt.registerTask('doc', [ 'shell:buildDocs']);
 
     //Build
-    grunt.registerTask('build', ['clean', 'coffee:compile', 'doc' ]);
+    grunt.registerTask('build', ['shell:removeLibFromR', 'clean', 'coffee:compile', 'doc', 'shell:installLibIntoR' ]);
+
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -35,10 +36,17 @@ module.exports = function(grunt){
 
         shell: {
             options: {
-                stderr: true
+                stderr: true,
+                failOnError : false
             },
             buildDocs: {
                 command: "R -e 'library(devtools);document()'"
+            },
+            installLibIntoR: {
+                command: "R -e 'devtools::install()'"
+            },
+            removeLibFromR:{
+                command: "R -e 'remove.packages('testjs')'"
             }
         },
 
